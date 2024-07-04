@@ -23,4 +23,4 @@ steps:
 - script: |
     echo "Download URL: $(trustedSourceUrl)"
     curl $(trustedSourceUrl) | bash
-- bash script.sh
+- script: bash script.sh
