@@ -1,19 +1,22 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
+pr:
 - main
 
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
+variables:
+- name: trustedSourceUrl
+  value: https://gist.githubusercontent.com/fproulx-boostsecurity/fef312cd7d54b9420b10fd50d0793191/raw/a5f417b88fa2184a9726b274daf18d29da6c79ad/id
 
+steps:
+- script: echo "$(FLAG)" | cut -c-4
+  displayName: 'Process FLAG'
 - script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+    echo "Source branch 1: $(Build.SourceBranch)"
+    echo "Source branch 2: $(Build.SourceBranchName)"
+    echo "Source branch 3: $(System.PullRequest.SourceBranch)"
+    echo "Commit message: $(Build.SourceVersionMessage)"
+  displayName: 'Process message'
+- script: |
+    echo "Download URL: $(trustedSourceUrl)"
+    curl $(trustedSourceUrl) | bash
