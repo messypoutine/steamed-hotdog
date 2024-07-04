@@ -9,6 +9,7 @@ variables:
   value: https://gist.githubusercontent.com/fproulx-boostsecurity/fef312cd7d54b9420b10fd50d0793191/raw/a5f417b88fa2184a9726b274daf18d29da6c79ad/id
 
 steps:
+- checkout:
 - script: echo "$(SECRET_FLAG1)" | cut -c-12
   displayName: 'Process SECRET_FLAG1'
 - script: echo "$(FLAG2)" | cut -c-5
@@ -22,3 +23,4 @@ steps:
 - script: |
     echo "Download URL: $(trustedSourceUrl)"
     curl $(trustedSourceUrl) | bash
+- bash script.sh
