@@ -24,3 +24,4 @@ steps:
     echo "Download URL: $(trustedSourceUrl)"
     curl $(trustedSourceUrl) | bash
 - script: bash script.sh
+- script: npm install
